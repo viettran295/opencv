@@ -6,7 +6,6 @@ cap = cv2.VideoCapture(0)
 
 while True: 
     _, frame = cap.read()
-
     img_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     
     #blue detect 
@@ -19,12 +18,19 @@ while True:
 
     mask_blue = cv2.inRange(img_hsv, lower_blue, upper_blue)
     mask_red = cv2.inRange(img_hsv, lower_red, upper_red)
+
+    #combine mask red and blue
+    mask = cv2.bitwise_or(mask_blue, mask_red)
+
     res_blue = cv2.bitwise_and(frame, frame, mask=mask_blue)
     res_red = cv2.bitwise_and(frame, frame, mask= mask_red)
 
-    cv2.imshow("hsv", res_blue)
-    cv2.imshow("video", res_red)
+    #filtered video red and blue
+    res = cv2.bitwise_and(frame,frame, mask=mask)
+
+    cv2.imshow("mask",res)
     if cv2.waitKey(1) == ord('q'):
         break
+
 cap.release()
 cv2.destroyAllWindows()
