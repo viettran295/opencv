@@ -28,7 +28,14 @@ while True:
     #filtered video red and blue
     res = cv2.bitwise_and(frame,frame, mask=mask)
 
-    cv2.imshow("mask",res)
+    #smoothing
+    kernel = np.ones((15,15), np.float32)/225
+    smooth = cv2.filter2D(res, -1, kernel)
+    blur = cv2.GaussianBlur(res, (15,15),0)
+    medianBlur = cv2.medianBlur(res,15)
+    bilateral = cv2.bilateralFilter(res, 15, 75, 75)
+
+    cv2.imshow("smooth",smooth)
     if cv2.waitKey(1) == ord('q'):
         break
 

@@ -10,7 +10,6 @@ csv = pd.read_csv("colors.csv", names=index)
 
 clicked = False
 b = g = r = x_pos = y_pos = 0
-
 def getColorName(R,G,B):
     minimum = 10000
     for i in range(len(csv)):
@@ -19,6 +18,7 @@ def getColorName(R,G,B):
             minimum = d
             cname = csv.loc[i,"color_name"]
     return cname
+    
 def draw_fucntion(event,x,y,flags,params):
     if event == cv2.EVENT_LBUTTONDBLCLK:
         global r, g, b, clicked, x_pos, y_pos
@@ -26,9 +26,9 @@ def draw_fucntion(event,x,y,flags,params):
         x_pos = x
         y_pos = y
         b, r, g = palette[y,x]
-        # b = int(b)
-        # r = int(r)
-        # g = int(g)
+        b = int(b)
+        r = int(r)
+        g = int(g)
         # print(f"b = {b}, r = {r}, g = {g}")
 
 cv2.namedWindow("palette")
