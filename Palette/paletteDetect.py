@@ -26,10 +26,10 @@ def draw_fucntion(event,x,y,flags,params):
         x_pos = x
         y_pos = y
         b, r, g = palette[y,x]
-        b = int(b)
-        r = int(r)
-        g = int(g)
-        print(f"b = {b}, r = {r}, g = {g}")
+        # b = int(b)
+        # r = int(r)
+        # g = int(g)
+        # print(f"b = {b}, r = {r}, g = {g}")
 
 cv2.namedWindow("palette")
 cv2.setMouseCallback("palette", draw_fucntion)
@@ -37,7 +37,8 @@ while True:
     cv2.imshow("palette", palette)
     if(clicked):
         cv2.rectangle(palette, (10,20),(750,60),(b,r,g),-1)
-        text = getColorName(r,g,b)
+        # note: sequence from color
+        text = getColorName(g,r,b)
         cv2.putText(palette,text, (50,50),2,0.8,(0,0,0),2,cv2.LINE_AA)
         clicked = False
     if cv2.waitKey(1) == ord('q'):
