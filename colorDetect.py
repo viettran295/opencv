@@ -28,14 +28,21 @@ while True:
     #filtered video red and blue
     res = cv2.bitwise_and(frame,frame, mask=mask)
 
-    #smoothing
-    kernel = np.ones((15,15), np.float32)/225
-    smooth = cv2.filter2D(res, -1, kernel)
-    blur = cv2.GaussianBlur(res, (15,15),0)
-    medianBlur = cv2.medianBlur(res,15)
-    bilateral = cv2.bilateralFilter(res, 15, 75, 75)
+    # #smoothing
+    # kernel = np.ones((15,15), np.float32)/225
+    # smooth = cv2.filter2D(res, -1, kernel)
+    # blur = cv2.GaussianBlur(res, (15,15),0)
+    # medianBlur = cv2.medianBlur(res,15)
 
-    cv2.imshow("smooth",smooth)
+    kernel = np.ones((5,5),np.uint8)
+    erosion = cv2.erode(frame, kernel, iterations=1)
+    #binary OR
+    dilation = cv2.dilate(frame, kernel, iterations=1)
+
+    cv2.imshow("erosion", erosion)
+    cv2.imshow("dialtion", dilation)
+    cv2.imshow("res",res)
+    cv2.imshow("frame",frame)
     if cv2.waitKey(1) == ord('q'):
         break
 
