@@ -34,10 +34,11 @@ while True:
     # blur = cv2.GaussianBlur(res, (15,15),0)
     # medianBlur = cv2.medianBlur(res,15)
 
-    kernel = np.ones((5,5),np.uint8)
-    erosion = cv2.erode(frame, kernel, iterations=1)
-    #binary OR
-    dilation = cv2.dilate(frame, kernel, iterations=1)
+    #morphological trans
+    # kernel = np.ones((5,5),np.uint8)
+    # erosion = cv2.erode(frame, kernel, iterations=1)
+    # #binary OR
+    # dilation = cv2.dilate(frame, kernel, iterations=1)
 
     cv2.imshow("erosion", erosion)
     cv2.imshow("dialtion", dilation)
