@@ -1,0 +1,1 @@
+   # defect = cv2.convexityDefects(contours,hull)
