@@ -30,9 +30,10 @@ def getMaxContour(img,thresh):
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     #choose and draw max Area
     contours = max(contours, key=lambda x: cv2.contourArea(x))
+    #find convexity defects (bulged inside)->returnPoints=False
     hull = cv2.convexHull(contours, returnPoints=False)
     # cv2.drawContours(img, [hull], -1, (0,255,255),2)
-    cv2.drawContours(img, [contours], -1, (255,0,0), 1)
+    cv2.drawContours(img, [contours], -1, (255,0,0), 2)
     defects = cv2.convexityDefects(contours, hull)
     if defects is not None:
         cnt = 0

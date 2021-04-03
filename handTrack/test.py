@@ -10,14 +10,17 @@ def preprocess(img):
     ret,thresh = cv2.threshold(mask,0,255,cv2.THRESH_BINARY)
     return thresh
 
+def getContour(img):
+    contours,hierarchy = cv2.findContours(thresh,cv2.RETR_LIST,cv2.CHAIN_APPROX_NONE)
+    for cnt in contours:
+        print(contour)
+
 while True:
     _, frame = cap.read()
     thresh = preprocess(frame)
-    contours,hierarchy = cv2.findContours(thresh,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
-    contours = max(contours, key= lambda x: cv2.contourArea(x))
-    cv2.drawContours(frame,[contours], -1, (255,0,0), 2)
-    cv2.imshow("origin",frame)
-    cv2.imshow("frame",thresh)
+    getContour(thresh)
+    # frame_con = np.concatenate((frame,thresh), axis=1)
+    cv2.imshow("thresh",thresh)
     if cv2.waitKey(1) == ord('q'):
         break
 cv2.destroyAllWindows()
